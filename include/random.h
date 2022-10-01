@@ -23,4 +23,6 @@ u16 Random2(void);
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
+u16 RandomPokemon(void);
+
 #endif // GUARD_RANDOM_H

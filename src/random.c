@@ -16,3 +16,13 @@ void SeedRng(u16 seed)
 {
     gRngValue = seed;
 }
+
+u16 RandomPokemon(void)
+{
+    u16 pkmn = Random() % NATIONAL_DEX_DEOXYS;
+    if (pkmn > NATIONAL_DEX_CELEBI)
+    {
+        pkmn += 25;
+    }
+    return pkmn;
+}
