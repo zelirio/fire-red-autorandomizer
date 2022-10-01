@@ -49,17 +49,17 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
   //  A   A   A   A   A   A   A   A   A   A   A   ?
     { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 27},
-  //  C   C   C   D   D   D   H   H   H   U   U   O
+    //  C   C   C   D   D   D   H   H   H   U   U   O
     { 2,  2,  2,  3,  3,  3,  7,  7,  7, 20, 20, 14},
-  //  N   N   N   N   S   S   S   S   I   I   E   E
+    //  N   N   N   N   S   S   S   S   I   I   E   E
     {13, 13, 13, 13, 18, 18, 18, 18,  8,  8,  4,  4},
-  //  P   P   L   L   J   J   R   R   R   Q   Q   Q
+    //  P   P   L   L   J   J   R   R   R   Q   Q   Q
     {15, 15, 11, 11,  9,  9, 17, 17, 17, 16, 16, 16},
-  //  Y   Y   T   T   G   G   G   F   F   F   K   K
+    //  Y   Y   T   T   G   G   G   F   F   F   K   K
     {24, 24, 19, 19,  6,  6,  6,  5,  5,  5, 10, 10},
-  //  V   V   V   W   W   W   X   X   M   M   B   B
+    //  V   V   V   W   W   W   X   X   M   M   B   B
     {21, 21, 21, 22, 22, 22, 23, 23, 12, 12,  1,  1},
-  //  Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   !
+    //  Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   !
     {25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26},
 };
 
@@ -227,6 +227,10 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
 {
     u32 personality;
     s8 chamber;
+    if (VarGet(VAR_RANDOM_WILD_ENCOUNTER) == 1)
+    {
+        species = RandomPokemon();
+    }
     ZeroEnemyPartyMons();
     if (species != SPECIES_UNOWN)
     {
@@ -538,10 +542,10 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     // Neither
     if (landMonsInfo == NULL && waterMonsInfo == NULL)
         return SPECIES_NONE;
-        // Land Pokemon
+    // Land Pokemon
     else if (landMonsInfo != NULL && waterMonsInfo == NULL)
         return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
-        // Water Pokemon
+    // Water Pokemon
     else if (landMonsInfo == NULL && waterMonsInfo != NULL)
     {
         *isWaterMon = TRUE;
