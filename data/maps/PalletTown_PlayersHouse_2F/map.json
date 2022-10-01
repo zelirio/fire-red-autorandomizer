@@ -24,7 +24,17 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_SETTINGS",
+      "var_value": "1",
+      "script": "PalletTown_PlayersHouse_2F_EventScript_Settings_Selection"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

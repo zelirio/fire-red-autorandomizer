@@ -191,21 +191,21 @@
 #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
 
 
-#define VAR_0x408C                 0x408C
-#define VAR_0x408D                 0x408D
-#define VAR_0x408E                 0x408E
-#define VAR_0x408F                 0x408F
-#define VAR_0x4090                 0x4090
-#define VAR_0x4091                 0x4091
-#define VAR_0x4092                 0x4092
-#define VAR_0x4093                 0x4093
-#define VAR_0x4094                 0x4094
-#define VAR_0x4095                 0x4095
-#define VAR_0x4096                 0x4096
-#define VAR_0x4097                 0x4097
-#define VAR_0x4098                 0x4098
-#define VAR_0x4099                 0x4099
-#define VAR_0x409A                 0x409A
+#define VAR_RANDOM_WILD_ENCOUNTER                 0x408C
+#define VAR_RANDOM_TRAINER                 0x408D
+#define VAR_RANDOM_STARTER                 0x408E
+#define VAR_RANDOM_GIFT_POKEMON                 0x408F
+#define VAR_RANDOM_EVOLUTION                 0x4090
+#define VAR_RANDOM_MOVE                 0x4091
+#define VAR_STARTER_1                 0x4092
+#define VAR_STARTER_2                 0x4093
+#define VAR_STARTER_3                 0x4094
+#define VAR_DOJO_POKEMON_1                 0x4095
+#define VAR_DOJO_POKEMON_2                 0x4096
+#define VAR_DONT_RANDOMIZE                 0x4097
+#define VAR_RANDOM_ITEM                 0x4098
+#define VAR_RANDOM_ABILITY                 0x4099
+#define VAR_MAP_SCENE_SETTINGS                 0x409A
 #define VAR_0x409B                 0x409B
 #define VAR_0x409C                 0x409C
 #define VAR_0x409D                 0x409D
