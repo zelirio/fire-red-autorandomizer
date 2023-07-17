@@ -10,6 +10,7 @@
 #include "script_pokemon_util.h"
 #include "constants/items.h"
 #include "constants/pokemon.h"
+#include "random.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleTowerParty(void);
@@ -51,6 +52,11 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     int sentToPc;
     u8 heldItem[2];
     struct Pokemon *mon = AllocZeroed(sizeof(struct Pokemon));
+
+    if (VarGet(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) > 2 && VarGet(VAR_RANDOM_GIFT_POKEMON) == 1 && VarGet(VAR_DONT_RANDOMIZE) == 0)
+    {
+      species = RandomPokemon();
+    }
 
     CreateMon(mon, species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     heldItem[0] = item;
@@ -128,6 +134,11 @@ bool8 DoesPartyHaveEnigmaBerry(void)
 void CreateScriptedWildMon(u16 species, u8 level, u16 item)
 {
     u8 heldItem[2];
+
+    if (VarGet(VAR_RANDOM_WILD_ENCOUNTER) == 1)
+    {
+      species = RandomPokemon();
+    }
 
     ZeroEnemyPartyMons();
     CreateMon(&gEnemyParty[0], species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);

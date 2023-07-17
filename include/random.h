@@ -24,5 +24,7 @@ void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
 u16 RandomPokemon(void);
+u16 RandomMove(void);
+u16 RandomAbility(u32 personality);
 
 #endif // GUARD_RANDOM_H

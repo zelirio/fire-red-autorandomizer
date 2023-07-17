@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "moves.h"
 
 // The number 1103515245 comes from the example implementation
 // of rand and srand in the ISO C standard.
@@ -25,4 +26,14 @@ u16 RandomPokemon(void)
         pkmn += 25;
     }
     return pkmn;
+}
+
+u16 RandomMove(void)
+{
+    return (Random() % (MOVES_COUNT-1)) + 1;
+}
+
+u16 RandomAbility(u32 personality)
+{
+    return (personality % 77) + 1;
 }
