@@ -2278,8 +2278,12 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         if (moveLevel > (level << 9))
             break;
 
-        move = (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID);
-
+        if(VarGet(VAR_RANDOM_MOVE) == 1){
+            move = RandomMove();
+        }
+        else{
+            move = (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID);
+        }
         if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
@@ -2309,7 +2313,12 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 
     if ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) == (level << 9))
     {
-        gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_ID);
+        if(VarGet(VAR_RANDOM_MOVE) == 1){
+            gMoveToLearn = RandomMove();
+        }
+        else{
+            gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_ID);
+        }
         sLearningMoveTableID++;
         retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
@@ -3788,9 +3797,17 @@ u8 GetAbilityBySpecies(u16 species, bool8 abilityNum)
 
 u8 GetMonAbility(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-    return GetAbilityBySpecies(species, abilityNum);
+    if(VarGet(VAR_RANDOM_ABILITY) == 1)
+    {
+        u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+        return (personality % 77) + 1;
+    }
+    else
+    {
+        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+        return GetAbilityBySpecies(species, abilityNum);
+    }
 }
 
 static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
@@ -3940,7 +3957,14 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
     gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];
     gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];
-    gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
+    if(VarGet(VAR_RANDOM_ABILITY) == 1)
+    {
+        gBattleMons[battlerId].ability = (gBattleMons[battlerId].personality % 77) + 1;
+    }
+    else
+    {
+        gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
+    }
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gBattleMons[battlerId].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battlerId].otName);

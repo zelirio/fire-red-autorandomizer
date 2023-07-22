@@ -30,7 +30,7 @@ u16 RandomPokemon(void)
 
 u16 RandomMove(void)
 {
-    return (Random() % (MOVES_COUNT-1)) + 1;
+    return (Random() % (MOVES_COUNT - 1)) + 1;
 }
 
 u16 RandomAbility(u32 personality)
